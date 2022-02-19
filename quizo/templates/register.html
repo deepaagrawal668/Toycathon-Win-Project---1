@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Material+Icons|Source+Code+Pro|Roboto&display=swap"
+        rel="stylesheet"> -->
+    <title>Registration</title>
+</head>
+{% load static %}
+<body class="bg-pink-100 text-white w-full h-full bg-no-repeat bg-cover" style="background-image: url({% static 'bg1.jpg' %})">
+    <nav x-data="{show:false}" class="flex flex-row bg-blue-800 p-4 ">
+        <div>
+            <a href="#" class="text-white text-xl">
+                LOGO
+            </a>
+        </div>
+
+        <div class="block md:hidden ">
+            <button @click="show=!show"
+                class="flex items-center px-3 py-2 border rounded text-gray-100 border-gray-200 hover:text-white hover:border-white">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                </svg>
+            </button>
+        </div>
+        <div @click.away="show = false" :class="{ 'block': show, 'hidden': !show }"
+            class="w-full block flex-grow md:flex md:justify-end md:w-auto">
+            <div>
+                <a href="/login/"
+                    class="block md:inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 md:mt-0">Login</a>
+                <a href="#"
+                    class="block md:inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 md:mt-0">Register</a>
+
+            </div>
+        </div>
+    </nav>
+
+    <form method="POST" action="/register_attempt/">
+        {% csrf_token %}
+        <div class=" w-3/4 mx-auto my-8 space-x-96 px-4 space-y-4 m-8 ">
+
+            <div class="flex justify-center flex-col mx-auto w-3/2 ">
+
+
+                <div class="flex space-x-4 ">
+
+                    <div class="lg:w-1/2 mb-3 lg:mb-2 mx-1 ">
+
+
+                        <div class="px-1 flex items-center ">
+                            <label class="mb-4">First Name</label>
+                            <input type='text'name="fname" required placeholder="Enter your First Name"
+                                class="text-black mt-1 px-2 py-1 border rounded-lg  w-1/2 m-5 mr-8" />
+                           
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="lg:w-1/2  mb-3 lg:mb-2 mx-1 px-6">
+                        <div class="px-1">
+                            <label>Last Name</label>
+                            <input type='text'name="lname" required  placeholder="Enter your Last Name"
+                                class="text-black mt-1 px-2 py-1 border rounded-lg w-1/2 m-5 mr-5" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex space-x-4">
+
+                    <div class="lg:w-1/2  mb-3 lg:mb-2 mx-1">
+
+                        <div class="flex items-center">
+
+                            <label class="mb-5 mr-6">Email id</label>
+                            <input type='email'name="email" required  placeholder="Enter your Email-Id :"
+                                class="text-black mt-1 px-2 py-1 border rounded-lg w-1/2 m-5" />
+                        </div>
+                        
+                    </div>
+
+
+                    <div class="lg:w-1/2  mb-3 lg:mb-2 mx-1 px-6">
+                        
+                       
+                        <div class="px-1">
+                            <label>Phone no :</label>
+                            <input type='text' name="phn_no" required  placeholder="Enter your Phone number :"
+                                class="text-black   mt-1 px-2 py-1 border rounded-lg w-1/2 m-5" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex space-x-4">
+                    <div class="lg:w-1/2  mb-3 lg:mb-2 mx-1">
+                       
+                        <div class="flex items-center">
+
+                            <label class="mb-4 mr-10">DOB :</label>
+                            <input type='date' required  name="dob" class="text-black mt-1 px-2 py-1 border rounded-lg w-1/2 m-5" />
+                        </div>
+<!--                        
+                        <div class="px-1">
+                        </div> -->
+                    </div>
+                    <div class="flex items-center px-4">
+
+                        <label class="block mb-2 ">Select Gender :</label>
+                    </div>
+                    <div class="flex">
+
+                        <div class="flex items-center mb-2 mr-4">
+                            <input type="radio" id="radio-example-1" name="gender"
+                                class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2"  value="male">
+                            <label for="radio-example-1" required class="text-white">Male</label>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <input type="radio" id="radio-example-2" name="gender"
+                                class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2" value="female">
+                            <label for="radio-example-2"  class="text-white">Female</label>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            
+
+        </div>
+
+
+        <table class="mr-auto ml-auto">
+            <tr>
+                <td class="py-4">
+                    <label for="role">Select Roles :</label>
+                </td>
+                <td class="py-4 text-black">
+                    <select name="role" class="w-full border bg-white text-back rounded-xl px-2 py-1 outline-none ml-4" required >
+                        <option class="py-1 text-black"  value="student" >Student</option>
+                        <option class="py-1"  value="creator" >Content Creator</option>
+                        <option class="py-1" value="approver">Content Approval</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="py-4">
+                    <label class="mr-6 "  >User Name :</label>
+
+                </td>
+                <td class="py-4">
+                    <input type='text'name="username" placeholder="Enter User Name"
+                        class="text-black w-full mt-1 px-2 py-1  ml-4 border rounded-lg " required  />
+                </td>
+            </tr>
+            <tr>
+                <td class="py-4">
+
+                    <label class="mr-6">Password :</label>
+                </td>
+                <td class="py-4">
+                    <input type='password' name="pass" placeholder="Enter password"
+                        class="text-black w-full mt-1 px-2 py-1 ml-4 border rounded-lg "required  />
+
+                </td>
+
+            </tr>
+            <tr>
+                <td class="py-4">
+
+                    <label class="">Confirm password :</label>
+                </td>
+                <td class="py-4">
+
+                    <input type='password' name="confpass" placeholder="Confirm Password :"
+                        class="text-black mt-1 w-full px-2 py-1 ml-4 border rounded-lg mr-4  "required  />
+
+                </td>
+            </tr>
+        </table>
+
+ 
+        <button class="bg-blue-500 hover:bg-blue-700  text-white font-bold py-2 px-4 rounded-full flex mx-auto mt-8 mb-12" name="submitbtn">
+            Submit
+        </button>
+    </form>
+
+    <footer class="block bg-black text-white mx-auto ">
+
+
+        <div class="flex h-28">
+
+            <div class="p-5  m-auto">
+
+                <a href="#">Terms & Conditions Privacy Policy</a>
+                &copy;
+            </div>
+            <div class=" text-right m-auto">
+                <a href="#">Follow us</a>
+                <div class="flex ">
+                    <!-- <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"alt=""> -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
